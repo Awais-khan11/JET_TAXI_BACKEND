@@ -5,7 +5,7 @@ import { bookings } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const ukPhoneRegex = /^\+44\d{10}$/;
+// const ukPhoneRegex = /^\+44\d{10}$/;
 
 export async function sendMailCode(req: Request, res: Response): Promise<void> {
   try {
@@ -15,10 +15,10 @@ export async function sendMailCode(req: Request, res: Response): Promise<void> {
       res.status(400).json({ message: "Invalid email address" });
       return;
     }
-    if (!phone || !ukPhoneRegex.test(phone)) {
-      res.status(400).json({ message: "Only valid UK phone numbers allowed (+44XXXXXXXXXX)" });
-      return;
-    }
+    // if (!phone || !ukPhoneRegex.test(phone)) {
+    //   res.status(400).json({ message: "Only valid UK phone numbers allowed (+44XXXXXXXXXX)" });
+    //   return;
+    // }
 
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
